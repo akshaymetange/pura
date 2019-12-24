@@ -1,0 +1,30 @@
+<p>music works!</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+two way:<input type="text" [(ngModel)]="myfilter">
+{{myfilter}}
+<br>
+<span style="position:relative; left:30%;"><img src="../assets/music.png" class="p-3 m-2" /></span>
+Mypipe: {{"John Cena"|pipe:musicpipe}}
+<br>
+
+<table class="table table-bordered" *ngIf="music &&music.length">
+    <tr>
+        <th>singer</th>
+        <th>songName</th>
+        <th>city</th>
+        <th>song {{myvar|currency:'INR'}}</th>
+        <th>picture</th>
+        <th>{{Toggle|lowercase}}</th>
+        <th>Action</th>
+    </tr>
+    <tr *ngFor="let music of music">
+        <td>{{music.singer|mycity:music.city}}</td>
+        <td><a routerLink="detailedMusic/{{music.songName}}">{{music.songName}}</a></td>
+        <td>{{music.city}}</td>
+        <td><audio controls src="{{music.song}}"> </audio></td>
+        <td><img src="{{music.picture}}" height="70px" width="80px" *ngIf="music.showImage" /></td>
+        <td><button (click)="toggle(music)" class="btn btn-success m-1">{{buttonname}}</button></td>
+        <td><button (click)="editMusic(music)" class="fa fa-pencil" style="font-size:30px"></button>/
+            <button (click)="deleteMusic()" class="fa fa-trash" style="font-size:30px"></button></td>
+    </tr>
+</table>
